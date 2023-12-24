@@ -153,6 +153,22 @@ locals {
     }
   ])
 
+  app_db_grants =flatten([
+    for appuser, appdata in var.Databases : [
+      for dbgrants, data in appdata.db_grants : {
+        object_type = data.object_type
+        privileges =  data.privileges
+        objects = data.objects
+        role =data.role
+        owner_role =data.owner_role
+        grant_option = data.grant_option
+        dbname = appdata.db_name
+        dbschema = appdata.db_schema_name
+
+      } if data.object_type != "database"
+    ]
+  ])
+
 
 }
 
@@ -203,6 +219,11 @@ module "create_schema" {
 
 }
 
+module "Grant_priviliges" {
+  source = "../modules/Grant-privileges"
 
-
+  #Input Variable
+  db_grants = local.app_db_grants
+  
+}
 

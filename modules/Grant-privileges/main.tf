@@ -8,10 +8,11 @@ terraform {
 }
 
 resource "postgresql_default_privileges" "read_only_tables" {
-  role        = "test_role"
-  database    = "test_db"
-  schema      = "public"
-  owner       = "db_owner"
-  object_type = "table"
-  privileges  = ["SELECT"]
+  count    = length(var.db_grants)
+  role        = var.db_grants[count.index].role
+  database    = var.db_grants[count.index].dbname
+  schema      = var.db_grants[count.index].dbschema
+  owner       = var.db_grants[count.index].owner_role
+  object_type = var.db_grants[count.index].object_type
+  privileges  = var.db_grants[count.index].privileges
 }
