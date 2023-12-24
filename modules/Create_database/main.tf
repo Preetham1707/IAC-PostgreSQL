@@ -11,7 +11,7 @@ terraform {
 
 
 resource "postgresql_database" "createDatabase" {
-  count = length(var.database_object)  
+  count             = length(var.database_object)
   name              = var.database_object[count.index].dbname
   owner             = var.database_object[count.index].dbowner
   template          = "template0"

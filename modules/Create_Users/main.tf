@@ -14,7 +14,7 @@ resource "postgresql_role" "adminuserwithgroups" {
   password           = "user@1234"
   roles              = [var.admin_with_groups[count.index].group]
   encrypted_password = true
-  superuser = true
+  superuser          = true
 
 
 }

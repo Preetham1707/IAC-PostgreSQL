@@ -1,6 +1,6 @@
 terraform {
   backend "pg" {
-    conn_str = "postgres://kakashi:Chidori@1234@3.101.83.231:5432/terrapost"
+    conn_str = "postgres://kakashi:Chidori@1234@54.241.97.63:5432/terrapost"
 
 
   }
@@ -69,7 +69,7 @@ locals {
   admin_user_keys      = keys(local.dev_admin_users)
   dev_group_users_keys = [for user in local.dev_group_users : user.role]
   no_group_users_keys  = setsubtract(local.dev_user_keys, local.dev_group_users_keys)
-  
+
 
 
   dev_users = {
@@ -124,35 +124,39 @@ locals {
     }
   }
 
-  app_admin_users =flatten([
-    for appuser, appdata in var.Databases :[
-      for dbroles, data in appdata.db_roles :{
-        role = data.role
+  app_admin_users = flatten([
+    for appuser, appdata in var.Databases : [
+      for dbroles, data in appdata.db_roles : {
+        role       = data.role
         createrole = data.createrole
-        login =data.login
+        login      = data.login
       } if data.id == "admin"
     ]
   ])
-   
-  app_non_admin_users =flatten([
-    for appuser, appdata in var.Databases :[
-      for dbroles, data in appdata.db_roles :{
-        role = data.role
+
+  app_non_admin_users = flatten([
+    for appuser, appdata in var.Databases : [
+      for dbroles, data in appdata.db_roles : {
+        role       = data.role
         createrole = data.createrole
-        login =data.login
+        login      = data.login
       } if data.id != "admin"
     ]
   ])
 
 
   app_database = flatten([
-    for database , database_data in var.Databases :{
-      dbname = database_data.db_name
-      dbowner = database_data.db_admin      
+    for database, database_data in var.Databases : {
+      dbname   = database_data.db_name
+      dbowner  = database_data.db_admin
+      dbschema = database_data.db_schema_name
     }
   ])
 
+
 }
+
+
 
 
 
@@ -171,22 +175,31 @@ module "create_role" {
   source = "../modules/Create_Users"
 
   #Input Variable
-  environment          = local.environment
-  dev_users_with_groups =local.dev_group_users
-  users_without_groups = local.general_users
-  admin_with_groups = local.admin_group_users
-  app_admin_users = local.app_admin_users
-  app_non_admin_users = local.app_non_admin_users
-  depends_on           = [module.create_groups]
+  environment           = local.environment
+  dev_users_with_groups = local.dev_group_users
+  users_without_groups  = local.general_users
+  admin_with_groups     = local.admin_group_users
+  app_admin_users       = local.app_admin_users
+  app_non_admin_users   = local.app_non_admin_users
+  depends_on            = [module.create_groups]
 }
 
 
 module "create_database" {
   source = "../modules/Create_database"
-  
+
   #Input Variable
   database_object = local.app_database
-  depends_on = [ module.create_role ]
+  depends_on      = [module.create_role]
+
+}
+
+module "create_schema" {
+  source = "../modules/Create_schema"
+
+  #Input variable 
+  database_object = local.app_database
+  depends_on      = [module.create_database]
 
 }
 

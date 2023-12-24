@@ -24,9 +24,9 @@ variable "users_without_groups" {
 
 variable "app_admin_users" {
   type = list(object({
-    role  = string
-   createrole = bool
-   login=bool
+    role       = string
+    createrole = bool
+    login      = bool
   }))
 
 }
@@ -34,9 +34,9 @@ variable "app_admin_users" {
 
 variable "app_non_admin_users" {
   type = list(object({
-    role  = string
+    role       = string
     createrole = bool
-    login=bool
+    login      = bool
   }))
 
 }
