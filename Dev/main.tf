@@ -224,6 +224,7 @@ module "Grant_priviliges" {
 
   #Input Variable
   db_grants = local.app_db_grants
+  depends_on = [ module.create_schema ]
   
 }
 

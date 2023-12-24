@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-resource "postgresql_default_privileges" "read_only_tables" {
+resource "postgresql_default_privileges" "grantappPrivileges" {
   count    = length(var.db_grants)
   role        = var.db_grants[count.index].role
   database    = var.db_grants[count.index].dbname
