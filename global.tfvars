@@ -75,7 +75,6 @@ groups = {
     users = {
       Obito  = { name = "Obito", environments = ["dev", "staging", "production"] }
       Itachi = { name = "Itachi", environments = ["dev", "staging"] }
-      # Sasuke = { name = "sasuke", environments = ["dev", "staging"] }
     }
   }
 

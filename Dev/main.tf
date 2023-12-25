@@ -1,6 +1,6 @@
 terraform {
   backend "pg" {
-    conn_str = "postgres://kakashi:Chidori@1234@54.241.97.63:5432/terrapost"
+    conn_str = "postgres://kakashi:Chidori@1234@13.57.51.221:5432/terrapost"
 
 
   }
@@ -220,7 +220,7 @@ module "create_schema" {
 }
 
 module "Grant_priviliges" {
-  source = "../modules/Grant-privileges"
+  source = "../modules/Grant_privileges"
 
   #Input Variable
   db_grants = local.app_db_grants
