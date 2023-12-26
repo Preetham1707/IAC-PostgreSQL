@@ -16,3 +16,12 @@ resource "postgresql_default_privileges" "grantappPrivileges" {
   object_type = var.db_grants[count.index].object_type
   privileges  = var.db_grants[count.index].privileges
 }
+
+
+resource "postgresql_grant" "grantdbrolePrivileges" {
+  count    = length(var.role_db_grants)
+  database    = var.role_db_grants[count.index].dbname
+  role        = var.role_db_grants[count.index].role
+  object_type = "database"
+  privileges  = var.role_db_grants[count.index].is_admin ? ["CREATE", "CONNECT", "TEMPORARY"] : ["CONNECT"]
+}

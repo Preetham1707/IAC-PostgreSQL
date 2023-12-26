@@ -2,6 +2,7 @@ variable "users" {
   type = map(object({
     environment = list(string)
     is_admin    = bool
+    applications = list(string)
   }))
 }
 

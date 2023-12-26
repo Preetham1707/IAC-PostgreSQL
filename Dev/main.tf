@@ -1,6 +1,6 @@
 terraform {
   backend "pg" {
-    conn_str = "postgres://kakashi:Chidori@1234@13.57.51.221:5432/terrapost"
+    conn_str = "postgres://kakashi:Chidori@1234@50.18.19.83:5432/terrapost"
 
 
   }
@@ -170,6 +170,18 @@ locals {
   ])
 
 
+  role_db_grants = flatten([
+    for user , userdata in var.users :[
+      for app , appdata in userdata.applications :{
+        role = user
+        is_admin = userdata.is_admin
+        dbname = appdata
+      }if length(userdata.applications) > 0
+      ]
+
+    ])
+
+
 }
 
 
@@ -224,7 +236,9 @@ module "Grant_priviliges" {
 
   #Input Variable
   db_grants = local.app_db_grants
+  role_db_grants = local.role_db_grants
   depends_on = [ module.create_schema ]
   
 }
+
 

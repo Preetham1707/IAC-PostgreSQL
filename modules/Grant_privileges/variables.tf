@@ -11,3 +11,12 @@ variable "db_grants" {
     }))
   
 }
+
+variable "role_db_grants" {
+    type = list(object({
+      role = string
+      is_admin =bool
+      dbname = string
+    }))
+  
+}

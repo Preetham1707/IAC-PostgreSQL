@@ -35,10 +35,27 @@ Modules in the project :
 
 In this project we are using modules to configure and apply each individual aspects involved in a database like creating roles , creating groups , creating Databases etc.
 
-    The modules in the project are as follows:
+The modules in the project are as follows:
 
-        1) Create_Users
-        2) Create_groups
+1) Create_Users :  Creates user on the database server which can connect with the database applications created.
+
+
+
+![Alt text](image-1.png)
+
+
+Adds created users to their specified groups while role creation by checking if the user is part of any group.
+
+
+![Alt text](image-4.png)
+
+
+
+2) Create_groups : create groups which consists of multiple users associated under a specific group.
+
+
+
+        
         3) Create_schmea
         4) Create_database
         5) Grant_priviliges
