@@ -8,13 +8,13 @@ users = {
     applications = ["app1" , "app2"]
   }
   Naruto = {
-    environment = ["dev", "staging"]
+    environment = ["dev"]
     is_admin : false
     applications = ["app1"]
   }
 
   Sasuke = {
-    environment = ["dev", "staging"]
+    environment = ["staging"]
     is_admin : false
     applications = ["app2"]
   }
@@ -25,13 +25,13 @@ users = {
     applications = ["app1" , "app2"]
   }
   Itachi = {
-    environment = ["dev", "staging"]
+    environment = ["dev"]
     is_admin : false
      applications = ["app1"]
   }
 
   Nagato = {
-    environment = ["dev", "staging"]
+    environment = ["staging"]
     is_admin : false
     applications = ["app2"]
   }
@@ -46,13 +46,13 @@ users = {
     applications =[]
   }
   MightGuy = {
-    environment = ["dev", "staging"]
+    environment = ["staging"]
     is_admin : false
     applications =[]
   }
 
   Shikamaru = {
-    environment = ["dev", "staging"]
+    environment = ["dev"]
     is_admin : false
     applications =[]
   }
@@ -67,8 +67,8 @@ groups = {
     name = "leaf_village"
     users = {
       Minato = { name = "Minato", environments = ["dev", "staging", "production"] }
-      Naruto = { name = "Naruto", environments = ["dev", "staging"] }
-      Sasuke = { name = "sasuke", environments = ["dev", "staging"] }
+      Naruto = { name = "Naruto", environments = ["dev"] }
+      Sasuke = { name = "sasuke", environments = ["staging"] }
     }
 
   }
@@ -85,9 +85,9 @@ groups = {
     name = "ex_leafVillage"
     users = {
       Obito  = { name = "Obito", environments = ["dev", "staging", "production"] }
-      Itachi = { name = "Itachi", environments = ["dev", "staging"] }
+      Itachi = { name = "Itachi", environments = ["dev"] }
     }
-  }
+  } 
 
 
 }

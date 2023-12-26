@@ -37,28 +37,17 @@ In this project we are using modules to configure and apply each individual aspe
 
 The modules in the project are as follows:
 
-1) Create_Users :  Creates user on the database server which can connect with the database applications created.
+        1) Create_Users :  
+                -->Creates user on the database server which can connect with the database applications created.
+                -->Adds created users to their specified groups while role creation by checking if the user is part of any group.
 
-
-
-![Alt text](image-1.png)
-
-
-Adds created users to their specified groups while role creation by checking if the user is part of any group.
-
-
-![Alt text](image-4.png)
-
-
-
-2) Create_groups : create groups which consists of multiple users associated under a specific group.
-
-
-
+        2) Create_groups : create groups which consists of multiple users associated under a specific group.
         
-        3) Create_schmea
-        4) Create_database
-        5) Grant_priviliges
+        3) Create_schmea : create schema associated to a database
+
+        4) Create_database : create Database from the provided metadata in the global variables file.
+
+        5) Grant_priviliges : Grant privileges to database and roles.
 
         These modules are referenced in main.tf file in each environment by calling modules.
 
@@ -67,5 +56,5 @@ Adds created users to their specified groups while role creation by checking if 
 
 global.tfVars 
 
-This terraform vars file contains all the data related to the variables which could  be used in creation of a PostgreSQL.
+This terraform vars file contains all the data related to the variables which could  be used in creation of a PostgreSQL database along with Schema , groups , and roles.
 
